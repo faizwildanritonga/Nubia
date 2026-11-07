@@ -64,6 +64,6 @@ PRODUCT_PACKAGES += \
     android.system.keystore2
     
 
-export OF_CUSTOM_BATTERY_PATH=/sys/class/power_supply/battery/capacity
-export OF_SCREEN_H=2400
+
+OF_SCREEN_H=2400
 OF_MAINTAINER := Massatriof16
