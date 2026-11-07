@@ -1,31 +1,40 @@
 # SPDX-FileCopyrightText: 2016-2023 Unisoc (Shanghai) Technologies Co., Ltd
 # SPDX-License-Identifier: LicenseRef-Unisoc-General-1.0
 
-# imported from /init.recovery.${ro.hardware}.rc
+#
+## Please include it in /init.recovery.${ro.hardware}.rc
+#
 
 service healthd /system/bin/healthd -r
     critical
     seclabel u:r:healthd:s0
 
-# create_splloader_dual_slot_byname_path removed: the script is not shipped in
-# this ramdisk, so the on init start was a failed exec on every boot
-#
-# vendor.mlogservice removed earlier for the same reason
+service create_splloader_dual_slot_byname_path /system/bin/create_splloader_dual_slot_byname_path.sh
+    user root
+    group root system
+    disabled
+    oneshot
+    seclabel u:r:create_spl_link_recovery:s0
+
+service vendor.mlogservice /vendor/bin/mlogservice
+    class main
+    user shell
+    group system root
+
 
 on init
-    # strict PROT_EXEC checks on mmap/mprotect
+    # Apply strict SELinux checking of PROT_EXEC on mmap/mprotect calls.
     write /sys/fs/selinux/checkreqprot 0
     start healthd
+    start create_splloader_dual_slot_byname_path
 
     export PATH /sbin:/system/bin:/vendor/bin
-    export SECONDARY_STORAGE /external_sd
+    export SECONDARY_STORAGE /sdcard
 
-    # TWRP mounts the card at /external_sd (see system/etc/twrp.flags), the
-    # stock paths stay as symlinks so both names resolve to the card.
     mkdir /storage
-    mkdir /external_sd
-    symlink /external_sd /storage/sdcard0
-    symlink /external_sd /mnt/sdcard
+    mkdir /storage/sdcard1
+    mkdir /sdcard
+    symlink /sdcard /mnt/sdcard
     symlink /system/etc/bluetooth /etc/bluetooth
 
     mkdir /systeminfo 0777 system system
@@ -45,7 +54,8 @@ on init
     chown system root /proc/cpwcn/wdtirq
     chmod 766 /proc/cpwcn/wdtirq
 
-    # ConfigFS USB gadget
+    # Create mount-point for ConfigFS USB gadgets
+    # Add standard gadget entries
     mount configfs none /config
     mkdir /config/usb_gadget/g1 0770 shell shell
     write /config/usb_gadget/g1/idVendor 0x1782
@@ -101,10 +111,10 @@ on fs
     mkdir /data/misc/bluetooth 0770 system system
 
 on post-fs-data
-    # re-chown/chmod /data: mount runs as root with defaults
+    # We chown/chmod /data again so because mount is run as root + defaults
     chown system system /data
     chmod 0771 /data
-    # restorecon in case userdata was reset
+    # We restorecon /data in case the userdata partition has been reset.
     restorecon /data
     mkdir /data/misc 01771 system misc
     #mkdir /data/misc/bluedroid 0770 bluetooth net_bt_stack
@@ -113,7 +123,7 @@ on post-fs-data
     chown bluetooth system /data/misc/bluedroid/bt_stack.conf
     chmod 0640 /data/misc/bluedroid/bt_stack.conf
 
-    # wifi
+    #add wifi
     mkdir /data/vendor/wifi 0770 wifi wifi
     mkdir /data/vendor/wifi/wpa 0770 wifi wifi
     mkdir /data/vendor/wifi/wpa/sockets 0770 wifi wifi
@@ -125,13 +135,13 @@ on post-fs-data
     rmdir /data/system/wpa_supplicant
     mkdir /data/misc/dhcp 0770 dhcp dhcp
 
-    # dnsmasq.leases readback for dhcp
+    #to observe dnsmasq.leases file for dhcp information
     chown dhcp system /data/misc/dhcp
     setprop wifi.interface wlan0
     mkdir /data/misc/dhcp6c 0770 dhcp dhcp
     chown dhcp system /data/misc/dhcp6c
 
-    # ylog on /data
+    # Ylog dir on /data partition
     mkdir /data/vendor 0751 root root
     mkdir /data/vendor/local 0751 root root
 
@@ -168,17 +178,6 @@ on property:sys.usb.configfs=1 && property:sys.usb.ffs.ready=1 && property:sys.u
     symlink /config/usb_gadget/g1/functions/vser.gs7 /config/usb_gadget/g1/configs/b.1/f2
     symlink /config/usb_gadget/g1/functions/sprdgser.gs0 /config/usb_gadget/g1/configs/b.1/f3
 
-    write /config/usb_gadget/g1/UDC ${sys.usb.controller}
-    setprop sys.usb.state ${sys.usb.config}
-
-on property:sys.usb.config=mtp,adb
-    start adbd
-
-# TWRP sets mtp,adb but the ramdisk rc has no action for it, so the UDC stays unbound
-on property:sys.usb.config=mtp,adb && property:sys.usb.ffs.ready=1 && property:sys.usb.configfs=1
-    write /config/usb_gadget/g1/idProduct 0xD001
-    write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "adb"
-    symlink /config/usb_gadget/g1/functions/ffs.adb /config/usb_gadget/g1/configs/b.1/f1
     write /config/usb_gadget/g1/UDC ${sys.usb.controller}
     setprop sys.usb.state ${sys.usb.config}
 

@@ -10,22 +10,7 @@
 #	This software is released under GPL version 3 or any later version.
 #	See <http://www.gnu.org/licenses/>.
 #
-FDEVICE="Z2465N"
-fox_get_target_device() {
-local chkdev=$(echo "$BASH_SOURCE" | grep -w $FDEVICE)
-   if [ -n "$chkdev" ]; then
-      FOX_BUILD_DEVICE="$FDEVICE"
-   else
-      chkdev=$(set | grep BASH_ARGV | grep -w $FDEVICE)
-      [ -n "$chkdev" ] && FOX_BUILD_DEVICE="$FDEVICE"
-   fi
-}
 
-if [ -z "$1" -a -z "$FOX_BUILD_DEVICE" ]; then
-   fox_get_target_device
-fi
-
-if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 	export LC_ALL="C"
 	export FOX_BUILD_DEVICE=Z2465N
 	export FOX_AB_DEVICE=1
@@ -49,4 +34,4 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 	export FOX_MISCELLANEOUS_ROOT_DIRECTORY=/sdcard
 	export FOX_ENABLE_KERNELSU_SUPPORT=1
 	export FOX_BUILD_TYPE=Unofficial
-fi
+

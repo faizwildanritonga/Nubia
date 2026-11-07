@@ -1,0 +1,14 @@
+# SPDX-FileCopyrightText: 2016-2023 Unisoc (Shanghai) Technologies Co., Ltd
+# SPDX-License-Identifier: LicenseRef-Unisoc-General-1.0
+
+/dev/block/by-name/miscdata      0660     root        system
+/dev/block/by-name/persist       0660     system      system
+/dev/block/by-name/sysdumpdb     0660     system      system
+# SPDX-License-Identifier: LicenseRef-Unisoc-General-1.0
+
+/sys/devices/platform/soc/soc:aon/64400000.spi/spi_master/spi4/spi4.0/64400000.spi:pmic@0:led-controller@180/leds/sc27xx:red hw_pattern 0660 system system
+/sys/devices/platform/soc/soc:aon/64400000.spi/spi_master/spi4/spi4.0/64400000.spi:pmic@0:led-controller@180/leds/sc27xx:green hw_pattern 0660 system system
+/sys/devices/platform/soc/soc:aon/64400000.spi/spi_master/spi4/spi4.0/64400000.spi:pmic@0:led-controller@180/leds/sc27xx:blue hw_pattern 0660 system system
+# device/sprd/vnd_mpool/module/vendor/ueventd/msoc/qogirn6pro/qogirn6pro.ueventd.rc
+# SPDX-FileCopyrightText: 2016-2023 Unisoc (Shanghai) Technologies Co., Ltd
+# SPDX-License-Identifier: LicenseRef-Unisoc-General-1.0

@@ -100,11 +100,11 @@ service vendor.prodproxy /system/bin/sprdstorageproxyd -f prodnv -d /dev/trusty-
 
 on property:crypto.ready=1
     start keymint-2-0
-    start storage-proxies
-    start ta-supplier-wait
+  #  start storage-proxies
+  #  start ta-supplier-wait
 
 on property:vendor.sprd.tsupplicant.enabled=1
-    start vendor.tsupplicant
+   # start vendor.tsupplicant
 
 # only once the supplier is up, the TEE asks it for the TA on connect
 on property:twrp.tsupplicant.ready=1
@@ -116,4 +116,4 @@ on property:ro.crypto.state=unsupported || property:ro.crypto.state=unencrypted 
 
 on boot
     start vendor.health-default
-    start vendor.charger
+   # start vendor.charger
