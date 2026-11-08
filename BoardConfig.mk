@@ -177,6 +177,8 @@ TW_USE_FSCRYPT_POLICY := 2
 TW_LOAD_VENDOR_MODULES := "zte_tpd.ko"
 
 
+TW_DEVICE_VERSION := Nubia_Neo_3GT_Massatrio16
+
 TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += \
     $(TARGET_OUT_SHARED_LIBRARIES)/android.hardware.gatekeeper@1.0 \
     $(TARGET_OUT_SHARED_LIBRARIES)/android.hardware.gatekeeper-V1-ndk \
