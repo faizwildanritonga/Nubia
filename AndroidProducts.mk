@@ -8,4 +8,4 @@ PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/twrp_Z2465N.mk
 
 COMMON_LUNCH_CHOICES := \
-    twrp_Z2465N-ap2a-eng
+    twrp_Z2465N-eng
