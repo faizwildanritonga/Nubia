@@ -20,7 +20,7 @@ $(call inherit-product-if-exists, vendor/twrp/config/common.mk)
 $(call inherit-product-if-exists, vendor/pb/config/common.mk)
 
 
-# Inherit from Z2577 device
+# Inherit from Z2465N device
 $(call inherit-product, device/nubia/Z2465N/device.mk)
 
 PRODUCT_DEVICE := Z2465N

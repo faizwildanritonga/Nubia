@@ -33,6 +33,9 @@ AB_OTA_PARTITIONS += \
     vbmeta_system \
     vbmeta_vendor
 
+
+
+
 TARGET_SCREEN_HEIGHT := 2392
 TARGET_SCREEN_WIDTH := 1080
 
@@ -59,11 +62,12 @@ TARGET_2ND_CPU_VARIANT := generic
 TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a55
 
 # Bootloader
-TARGET_BOOTLOADER_BOARD_NAME := Z2465N
+TARGET_BOOTLOADER_BOARD_NAME := ums9620_2h10
 TARGET_NO_BOOTLOADER := true
 
 # Display
-#TARGET_SCREEN_DENSITY := 320
+TARGET_SCREEN_DENSITY := 480
+TARGET_USES_VULKAN := true
 TW_LOAD_VENDOR_BOOT_MODULES := true
 BOARD_KERNEL_SEPARATED_DTBO := true
 
@@ -149,7 +153,7 @@ BOARD_AVB_VENDOR_BOOT_ROLLBACK_INDEX_LOCATION := 1
 
 # TWRP configuration
 TW_THEME := portrait_hdpi
-TW_SCREEN_BLANK_ON_BOOT := true
+TW_NO_SCREEN_BLANK_ON_BOOT := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_USE_TOOLBOX := true
 TW_INCLUDE_REPACKTOOLS := true
@@ -159,9 +163,6 @@ TARGET_USES_LOGD := true
 TWRP_INCLUDE_LOGCAT := true
 TW_INCLUDE_RESETPROP := true
 TW_INCLUDE_LIBRESETPROP := true
-TW_INCLUDE_LPTOOLS := true
-TW_INCLUDE_AVBCTL := true
-TW_INCLUDE_ZSTD := true
 TW_BRIGHTNESS_PATH := "/sys/class/backlight/sprd_backlight/brightness"
 TW_MAX_BRIGHTNESS := 1200
 TW_DEFAULT_BRIGHTNESS := 200
@@ -173,7 +174,7 @@ TW_DEFAULT_BRIGHTNESS := 200
 BOARD_USES_METADATA_PARTITION := true
 TW_USE_FSCRYPT_POLICY := 2
 #TW_FORCE_KEYMASTER_VER := true
-TW_LOAD_VENDOR_MODULES := "trusty.ko trusty-ipc.ko trusty-irq.ko trusty-log.ko trusty-pm.ko trusty-virtio.ko trusty-tui.ko ion_ipc_trusty.ko rpmb.ko lcd_state_notify.ko zte_tpd.ko"
+TW_LOAD_VENDOR_MODULES := "zte_tpd.ko sprd_tcpm.ko zte_skey.ko"
 
 
 TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += \
