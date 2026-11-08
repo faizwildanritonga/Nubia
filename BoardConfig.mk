@@ -11,9 +11,9 @@ ALLOW_MISSING_DEPENDENCIES := true
 # Build hacks
 BUILD_BROKEN_DUP_RULES := true
 BUILD_BROKEN_PLUGIN_VALIDATION := soong-libaosprecovery_defaults soong-libguitwrp_defaults soong-libminuitwrp_defaults soong-vold_defaults
-#PRODUCT_ENABLE_UFFD_GC := true
+
 BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
-BUILD_BROKEN_NINJA_USES_ENV_VARS += RTIC_MPGEN
+
 
 # A/B
 AB_OTA_UPDATER := true
@@ -64,7 +64,7 @@ TARGET_NO_BOOTLOADER := true
 
 # Display
 #TARGET_SCREEN_DENSITY := 320
-
+TW_LOAD_VENDOR_BOOT_MODULES := true
 BOARD_KERNEL_SEPARATED_DTBO := true
 
 
