@@ -122,5 +122,5 @@ on property:ro.crypto.state=unsupported || property:ro.crypto.state=unencrypted 
 
 on boot
     start vendor.health-default
-    start vendor.sprd.boot-hal-1-2
+   # start vendor.sprd.boot-hal-1-2
    # start vendor.charger
