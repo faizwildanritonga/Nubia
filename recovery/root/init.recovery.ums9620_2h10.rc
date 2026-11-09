@@ -4,7 +4,7 @@ import /init.recovery.common.rc
 # FBE decrypt: prepdecrypt sets crypto.ready; the SPRD boot HAL below provides
 # android.hardware.boot@1.0, which recovery waits on before decrypt
 on fs
-    start prepdecrypt
+  #  start prepdecrypt
 
 service prepdecrypt /system/bin/prepdecrypt.sh
     oneshot
@@ -108,20 +108,22 @@ service vendor.prodproxy /system/bin/sprdstorageproxyd -f prodnv -d /dev/trusty-
 
 on property:crypto.ready=1
     start keymint-2-0
-    start storage-proxies
-    start ta-supplier-wait
+    #start storage-proxies
+    #start ta-supplier-wait
 
 on property:vendor.sprd.tsupplicant.enabled=1
    # start vendor.tsupplicant
 
 # only once the supplier is up, the TEE asks it for the TA on connect
 on property:twrp.tsupplicant.ready=1
-    start gatekeeper-1-0
+    
 
 on property:ro.crypto.state=unsupported || property:ro.crypto.state=unencrypted || property:twrp.decrypt.done=true
     stop keymint-2-0
     stop gatekeeper-1-0
 
 on boot
+    start gatekeeper-1-0
+    start keymint-2-0
     start vendor.health-default
    # start vendor.charger
