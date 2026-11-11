@@ -68,5 +68,4 @@ PRODUCT_PACKAGES += \
     
 
 
-OF_SCREEN_H=2400
 OF_MAINTAINER := Massatriof16

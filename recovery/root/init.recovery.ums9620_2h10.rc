@@ -1,4 +1,4 @@
-# Recovery init for Nubia V80 Max (Z2577) - ro.hardware=ums9230_6h10
+# Recovery init 
 import /init.recovery.common.rc
 
 # FBE decrypt: prepdecrypt sets crypto.ready; the SPRD boot HAL below provides
@@ -21,7 +21,7 @@ disabled
 seclabel u:r:recovery:s0
 
 service gatekeeper-1-0 /system/bin/android.hardware.gatekeeper@1.0-service.trusty
-interface hidl android.hardware.gatekeeper@1.0::IGatekeeper default
+interface hidl android.hardware.gatekeeper@1.0::IGatekeeper/default
 user root
 group root
 disabled
@@ -115,8 +115,8 @@ on property:vendor.sprd.tsupplicant.enabled=1
    # start vendor.tsupplicant
 
 # only once the supplier is up, the TEE asks it for the TA on connect
-on property:twrp.tsupplicant.ready=1
-
+#on property:twrp.tsupplicant.ready=1
+#start gatekeeper-1-0
 
 on property:ro.crypto.state=unsupported || property:ro.crypto.state=unencrypted || property:twrp.decrypt.done=true
 stop keymint-2-0
@@ -125,5 +125,6 @@ stop gatekeeper-1-0
 on boot
 start gatekeeper-1-0
 start keymint-2-0
+start boot-hal-1-2
 start vendor.health-default
    # start vendor.charger

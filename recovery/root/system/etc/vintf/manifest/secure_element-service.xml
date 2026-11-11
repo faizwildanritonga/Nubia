@@ -1,0 +1,10 @@
+<!--
+    Input:
+        vendor/zte/tms-nfc/sys/opensource/SecureElement/secure_element-service.xml
+-->
+<manifest version="9.0" type="framework">
+    <hal format="aidl">
+        <name>android.se.omapi</name>
+        <fqname>ISecureElementService/default</fqname>
+    </hal>
+</manifest>

@@ -1,15 +1,50 @@
 <!--
     Input:
-        compatibility_matrix.empty.xml
+        vendor/zte/audio_ext/btaudio_intermediate/compatibility-matrix.xml
+        vendor/zte/interfaces/aimodelservice_aidl/vendor/zte/acousticservice/compatibility_matrix.xml
+        vendor/zte/subsys-components/subsystem_daemon_vendor/compatibility_matrix.xml
+        vendor/zte/charger/zte_ldd_cmd/interfaces/default/compatibility_matrix_ldd.xml
 -->
-<compatibility-matrix version="2.0" type="framework">
+<compatibility-matrix version="9.0" type="framework">
+    <hal format="aidl">
+        <name>vendor.btaudio_intermediate.btaudiointeraidl</name>
+        <interface>
+            <name>IVendorBtAudioInter</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.zte.acousticservice</name>
+        <interface>
+            <name>IAcousticModel</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.zte.ldd.cmd</name>
+        <version>1-2</version>
+        <interface>
+            <name>IZteLddCmd</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.zte.subsys</name>
+        <interface>
+            <name>ISubsys</name>
+            <instance>subsys</instance>
+        </interface>
+    </hal>
     <sepolicy>
         <kernel-sepolicy-version>30</kernel-sepolicy-version>
-        <sepolicy-version>26.0</sepolicy-version>
-        <sepolicy-version>27.0</sepolicy-version>
-        <sepolicy-version>28.0</sepolicy-version>
         <sepolicy-version>29.0</sepolicy-version>
         <sepolicy-version>30.0</sepolicy-version>
+        <sepolicy-version>31.0</sepolicy-version>
+        <sepolicy-version>32.0</sepolicy-version>
+        <sepolicy-version>33.0</sepolicy-version>
+        <sepolicy-version>34.0</sepolicy-version>
+        <sepolicy-version>202404</sepolicy-version>
+        <sepolicy-version>202504</sepolicy-version>
     </sepolicy>
     <avb>
         <vbmeta-version>1.0</vbmeta-version>
