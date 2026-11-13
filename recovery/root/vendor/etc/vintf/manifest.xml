@@ -3,9 +3,12 @@
         manifest.xml
         manifest_boot.xml
         manifest_nnhal.xml
+        manifest_gnss.xml
         manifest_nnhal.xml
         manifest_network.xml
         manifest.xml
+        manifest.xml
+        zteztecmd.xml
 -->
 <manifest version="4.0" type="device" target-level="6">
     <hal format="hidl">
@@ -69,6 +72,26 @@
         <fqname>@2.4::ICameraProvider/legacy/0</fqname>
     </hal>
     <hal format="hidl">
+        <name>android.hardware.gnss</name>
+        <transport>hwbinder</transport>
+        <version>1.1</version>
+        <interface>
+            <name>IGnss</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@1.1::IGnss/default</fqname>
+    </hal>
+    <hal format="hidl">
+        <name>android.hardware.gnss</name>
+        <transport>hwbinder</transport>
+        <version>2.1</version>
+        <interface>
+            <name>IGnss</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@2.1::IGnss/default</fqname>
+    </hal>
+    <hal format="hidl">
         <name>android.hardware.graphics.allocator</name>
         <transport>hwbinder</transport>
         <version>4.0</version>
@@ -98,15 +121,47 @@
         </interface>
         <fqname>@4.0::IMapper/default</fqname>
     </hal>
-    <hal format="aidl">
+    <hal format="hidl">
+        <name>android.hardware.media.omx</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IOmx</name>
+            <instance>default</instance>
+        </interface>
+        <interface>
+            <name>IOmxStore</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@1.0::IOmx/default</fqname>
+        <fqname>@1.0::IOmxStore/default</fqname>
+    </hal>
+    <hal format="hidl">
         <name>android.hardware.neuralnetworks</name>
-        <version>4</version>
-        <fqname>IDevice/armnn-gpu</fqname>
+        <transport>hwbinder</transport>
+        <version>1.3</version>
+        <interface>
+            <name>IDevice</name>
+            <instance>armnn-gpu</instance>
+            <instance>xtensa-xtensa</instance>
+        </interface>
+        <fqname>@1.3::IDevice/armnn-gpu</fqname>
+        <fqname>@1.3::IDevice/xtensa-xtensa</fqname>
     </hal>
     <hal format="aidl">
         <name>android.hardware.neuralnetworks</name>
         <version>4</version>
         <fqname>IDevice/unisoc-npu</fqname>
+    </hal>
+    <hal format="hidl">
+        <name>android.hardware.nfc</name>
+        <transport>hwbinder</transport>
+        <version>1.2</version>
+        <interface>
+            <name>INfc</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@1.2::INfc/default</fqname>
     </hal>
     <hal format="hidl">
         <name>android.hardware.renderscript</name>
@@ -117,6 +172,26 @@
             <instance>default</instance>
         </interface>
         <fqname>@1.0::IDevice/default</fqname>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.nxp.nxpnfc</name>
+        <transport>hwbinder</transport>
+        <version>2.0</version>
+        <interface>
+            <name>INxpNfc</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@2.0::INxpNfc/default</fqname>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.sprd.hardware.algoservice</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IAlgoService</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@1.0::IAlgoService/default</fqname>
     </hal>
     <hal format="hidl">
         <name>vendor.sprd.hardware.connmgr</name>
@@ -140,13 +215,35 @@
         <name>vendor.sprd.hardware.network</name>
         <fqname>INetworkControl/default</fqname>
     </hal>
-    <hal format="aidl">
+    <hal format="hidl">
+        <name>vendor.sprd.hardware.wcn</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IWcnVendorInterface</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@1.0::IWcnVendorInterface/default</fqname>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.zte.fingerprint.ztecmd</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IBiometricsFingerprint</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@1.0::IBiometricsFingerprint/default</fqname>
+    </hal>
+    <hal format="hidl">
         <name>vendor.zte.subsys</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
         <interface>
             <name>ISubsys</name>
             <instance>subsys</instance>
         </interface>
-        <fqname>ISubsys/subsys</fqname>
+        <fqname>@1.0::ISubsys/subsys</fqname>
     </hal>
     <sepolicy>
         <version>33.0</version>
