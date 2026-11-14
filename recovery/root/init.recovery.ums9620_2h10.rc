@@ -106,21 +106,6 @@ disabled
 seclabel u:r:recovery:s0
 setenv LD_LIBRARY_PATH /system/lib64:/system/lib64/hw
 
-on property:crypto.ready=1
-start keymint-2-0
-#start storage-proxies
-#start ta-supplier-wait
-
-on property:vendor.sprd.tsupplicant.enabled=1
-   # start vendor.tsupplicant
-
-# only once the supplier is up, the TEE asks it for the TA on connect
-#on property:twrp.tsupplicant.ready=1
-#start gatekeeper-1-0
-
-on property:ro.crypto.state=unsupported || property:ro.crypto.state=unencrypted || property:twrp.decrypt.done=true
-stop keymint-2-0
-stop gatekeeper-1-0
 
 on boot
 start gatekeeper-1-0
